@@ -54,6 +54,11 @@ void Update()
 
     // 雲の描画
     DrawImage("cloud1.png", cloudPos);
+    // 雲を動かす(役割:HW16A015 井上 太玖夢)
+    cloudPos.x += 1;
+    if(cloudPos.x >= 315) {
+        cloudPos = Vector2(-600, 100);
+    }
 
     // 弾の描画
     if (bulletPos.x > -999) {
