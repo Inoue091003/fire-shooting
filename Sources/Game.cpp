@@ -17,6 +17,8 @@ Vector2 bulletPos;      //!< 弾の位置
 Rect    targetRect;     //!< ターゲットの矩形
 int     score;          //!< スコア
 
+int     cannonDirection;//!< 砲台の向き　1:up / -1:down   (C)(実装:HW16A167 渕　崇洋)
+
 
 // ゲーム開始時に呼ばれる関数です。
 void Start()
@@ -28,6 +30,9 @@ void Start()
     targetRect = Rect(280, -140, 40, 40);   //ターゲットの位置(A)(実装:HW16A167 渕　崇洋)
     bulletPos.x = -999;
     score = 0;
+    
+    cannonDirection = 1;                    //砲台の向きの初期化 (C)(実装:HW16A167 渕　崇洋)
+    
 }
 
 // 1/60秒ごとに呼ばれる関数です。モデルの更新と画面の描画を行います。
@@ -61,7 +66,18 @@ void Update()
     if (bulletPos.x > -999) {
         DrawImage("bullet.png", bulletPos);
     }
-
+    
+    //砲台の移動(C)(実装:HW16A167 渕　崇洋)
+    cannonPos.y += 100 * cannonDirection * Time::deltaTime;
+    if (cannonPos.y < -150) {       //砲台の位置が青いRectの下
+        cannonDirection = 1;
+        cannonPos.y = -150;
+    }
+    if (cannonPos.y > -70) {        //砲台の位置が青いRectの上
+        cannonDirection = -1;
+        cannonPos.y = -70;
+    }
+    
     // 砲台の描画
     FillRect(Rect(cannonPos.x-10, -140, 20, 100), Color::blue);
     DrawImage("cannon.png", cannonPos);
