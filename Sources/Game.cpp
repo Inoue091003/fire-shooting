@@ -43,7 +43,7 @@ void Update()
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
-            score += 1;         // スコアの加算
+            score += 100;         // スコアの加算//（実装：HW16A051 上手一貴）
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         } else if (bulletPos.x >= 315) {    //枠外から左端に戻す(役割:HW16A015 井上 太玖夢)
             bulletPos.x = -999;
@@ -75,8 +75,8 @@ void Update()
     FillRect(targetRect, Color::red);
 
     // スコアの描画
-    SetFont("nicoca_v1.ttf", 20.0f);
-    DrawText(FormatString("%02d", score), Vector2(-319, 199), Color::black);
-    DrawText(FormatString("%02d", score), Vector2(-320, 200), Color::white);
+    SetFont("nicoca_v1.ttf", 80.0f);//（実装：HW16A051 上手一貴）
+    DrawText(FormatString("%05d", score), Vector2(-319, 149), Color::black);//（実装：HW16A051 上手一貴）
+    DrawText(FormatString("%05d", score), Vector2(-320, 150), Color::white);//（実装：HW16A051 上手一貴）
 }
 
