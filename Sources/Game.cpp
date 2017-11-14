@@ -38,13 +38,15 @@ void Update()
 
     // 弾の移動
     if (bulletPos.x > -999) {
-        bulletPos.x += 10 * Time::deltaTime;
+        bulletPos.x += 10;                  //弾の速さ(役割:HW16A015 井上 太玖夢)
 
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
             score += 1;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
+        } else if (bulletPos.x >= 315) {    //枠外から左端に戻す(役割:HW16A015 井上 太玖夢)
+            bulletPos.x = -999;
         }
     }
 
