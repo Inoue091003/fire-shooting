@@ -22,8 +22,10 @@ int     score;          //!< スコア
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+//    cannonPos = Vector2(-80, -150);
+    cannonPos = Vector2(-320, -150);        //砲台の位置(A)(実装:HW16A167 渕　崇洋)
+//    targetRect = Rect(80, -140, 40, 40);
+    targetRect = Rect(280, -140, 40, 40);   //ターゲットの位置(A)(実装:HW16A167 渕　崇洋)
     bulletPos.x = -999;
     score = 0;
 }
