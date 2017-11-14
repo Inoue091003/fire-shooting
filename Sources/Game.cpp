@@ -17,16 +17,26 @@ Vector2 bulletPos;      //!< 弾の位置
 Rect    targetRect;     //!< ターゲットの矩形
 int     score;          //!< スコア
 
+int     cannonDirection;//!< 砲台の向き　1:up / -1:down   (C)(実装:HW16A167 渕　崇洋)
+
 
 // ゲーム開始時に呼ばれる関数です。
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+//    cannonPos = Vector2(-80, -150);
+    cannonPos = Vector2(-320, -150);        //砲台の位置(A)(実装:HW16A167 渕　崇洋)
+//    targetRect = Rect(80, -140, 40, 40);
+    targetRect = Rect(280, -140, 40, 40);   //ターゲットの位置(A)(実装:HW16A167 渕　崇洋)
     bulletPos.x = -999;
     score = 0;
+<<<<<<< HEAD
     PlayBGM("bgm_maoudamashii_8bit07.mp3"); //ゲーム背景音(実装：HW16A154 西本　迅輝）
+=======
+    
+    cannonDirection = 1;                    //砲台の向きの初期化 (C)(実装:HW16A167 渕　崇洋)
+    
+>>>>>>> e8303fff4bee329bc3f76c5f05fc2d2bbe8240bd
 }
 
 // 1/60秒ごとに呼ばれる関数です。モデルの更新と画面の描画を行います。
@@ -45,7 +55,7 @@ void Update()
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
-            score += 1;         // スコアの加算
+            score += 100;         // スコアの加算//（実装：HW16A051 上手一貴）
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
             PlaySound("se_maoudamashii_explosion03.mp3");   //ターゲットへの着弾音(実装：HW16A154 西本 迅輝)
         }
@@ -62,7 +72,18 @@ void Update()
     if (bulletPos.x > -999) {
         DrawImage("bullet.png", bulletPos);
     }
-
+    
+    //砲台の移動(C)(実装:HW16A167 渕　崇洋)
+    cannonPos.y += 100 * cannonDirection * Time::deltaTime;
+    if (cannonPos.y < -150) {       //砲台の位置が青いRectの下
+        cannonDirection = 1;
+        cannonPos.y = -150;
+    }
+    if (cannonPos.y > -70) {        //砲台の位置が青いRectの上
+        cannonDirection = -1;
+        cannonPos.y = -70;
+    }
+    
     // 砲台の描画
     FillRect(Rect(cannonPos.x-10, -140, 20, 100), Color::blue);
     DrawImage("cannon.png", cannonPos);
@@ -71,8 +92,8 @@ void Update()
     FillRect(targetRect, Color::red);
 
     // スコアの描画
-    SetFont("nicoca_v1.ttf", 20.0f);
-    DrawText(FormatString("%02d", score), Vector2(-319, 199), Color::black);
-    DrawText(FormatString("%02d", score), Vector2(-320, 200), Color::white);
+    SetFont("nicoca_v1.ttf", 80.0f);//（実装：HW16A051 上手一貴）
+    DrawText(FormatString("%05d", score), Vector2(-319, 149), Color::black);//（実装：HW16A051 上手一貴）
+    DrawText(FormatString("%05d", score), Vector2(-320, 150), Color::white);//（実装：HW16A051 上手一貴）
 }
 
