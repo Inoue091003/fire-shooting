@@ -30,13 +30,8 @@ void Start()
     targetRect = Rect(280, -140, 40, 40);   //ターゲットの位置(A)(実装:HW16A167 渕　崇洋)
     bulletPos.x = -999;
     score = 0;
-<<<<<<< HEAD
     PlayBGM("bgm_maoudamashii_8bit07.mp3"); //ゲーム背景音(実装：HW16A154 西本　迅輝）
-=======
-    
     cannonDirection = 1;                    //砲台の向きの初期化 (C)(実装:HW16A167 渕　崇洋)
-    
->>>>>>> e8303fff4bee329bc3f76c5f05fc2d2bbe8240bd
 }
 
 // 1/60秒ごとに呼ばれる関数です。モデルの更新と画面の描画を行います。
@@ -57,12 +52,9 @@ void Update()
         if (targetRect.Overlaps(bulletRect)) {
             score += 100;         // スコアの加算//（実装：HW16A051 上手一貴）
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
-<<<<<<< HEAD
         } else if (bulletPos.x >= 315) {    //枠外から左端に戻す(役割:HW16A015 井上 太玖夢)
             bulletPos.x = -999;
-=======
             PlaySound("se_maoudamashii_explosion03.mp3");   //ターゲットへの着弾音(実装：HW16A154 西本 迅輝)
->>>>>>> a4ef998fe115cddef9f318a7b3be24a16ab280bf
         }
     }
 
